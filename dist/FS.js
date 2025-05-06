@@ -32,11 +32,59 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const http_1 = __importDefault(require("http"));
 const fs = __importStar(require("fs"));
-fs.readFile("demo.txt", "utf-8", (err, data) => {
-    if (err) {
-        console.log(err);
-    }
-    console.log(data);
+const PORT = 3000;
+const server = http_1.default.createServer((req, res) => {
+    // fs.readFile("demo.txt","utf-8",(err,data)=>{
+    //     if(err){
+    //         res.write(err);
+    //     }
+    //     else{
+    //         res.end(data);
+    //     }
+    // });
+    fs.appendFile("demo.txt", "\n Thank you!", (err) => {
+        if (err) {
+            res.write(err);
+        }
+        else {
+            res.end("Content added successfully");
+        }
+    });
+    // fs.writeFile("example.txt","utf-8",(err)=>{
+    //     if(err){
+    //         res.write(err);
+    //     }else{
+    //         res.end("File Created Successfully");
+    //     }
+    // });
+    // fs.writeFile("example.txt","This file is used to write examples",(err)=>{
+    //     if(err){
+    //         res.write(err);
+    //     }else{
+    //         res.end("file content is success");
+    //     }
+    // });
+    // fs.rename("example.txt","sample.txt",(err)=>{
+    //     if(err){
+    //         res.write(err);
+    //     }else{
+    //         res.end("File name is changed successfully");
+    //     }
+    // })
+    // fs.unlink("sample.txt",(err)=>{
+    //     if(err){
+    //         res.write(err);
+    //     }else{
+    //         res.end("File deleted successfully");
+    //     }
+    // })
+});
+server.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
 });

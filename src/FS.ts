@@ -7,9 +7,16 @@ const server=http.createServer((req,res)=>{
     //         res.write(err);
     //     }
     //     else{
-    //         res.write(data);
+    //         res.end(data);
     //     }
     // });
+    fs.appendFile("demo.txt","\n Thank you!",(err)=>{
+        if(err){
+            res.write(err);
+        }else{
+            res.end("Content added successfully");
+        }
+    })
     // fs.writeFile("example.txt","utf-8",(err)=>{
     //     if(err){
     //         res.write(err);
@@ -31,13 +38,13 @@ const server=http.createServer((req,res)=>{
     //         res.end("File name is changed successfully");
     //     }
     // })
-    fs.unlink("sample.txt",(err)=>{
-        if(err){
-            res.write(err);
-        }else{
-            res.end("File deleted successfully");
-        }
-    })
+    // fs.unlink("sample.txt",(err)=>{
+    //     if(err){
+    //         res.write(err);
+    //     }else{
+    //         res.end("File deleted successfully");
+    //     }
+    // })
 })
 
 server.listen(PORT, () => {
